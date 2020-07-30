@@ -520,7 +520,7 @@ bool RBspObject::Draw()
 	RSetWBuffer(true);
 	dev->SetRenderState(D3DRS_ZWRITEENABLE, true);
 
-	int nCount = Materials.size() * max(1u, LightmapTextures.size());
+	int nCount = Materials.size() * std::max(static_cast<std::size_t>(1), LightmapTextures.size());
 
 	// Draw non-additive and opaque materials
 	DrawNodes<RM_FLAG_ADDITIVE | RM_FLAG_USEOPACITY, false, false>(nCount);
@@ -1973,7 +1973,7 @@ void RBspObject::CreatePolygonTable(RSBspNode *pNode, u16** Indices)
 			*Indices += (pInfo->nVertices - 2) * 3;
 		}
 
-		int nCount = Materials.size() * max(1u, LightmapTextures.size());
+		int nCount = Materials.size() * max(static_cast<std::size_t>(1), LightmapTextures.size());
 
 		SAFE_DELETE_ARRAY(pNode->pDrawInfo);
 		pNode->pDrawInfo = new RDrawInfo[nCount];

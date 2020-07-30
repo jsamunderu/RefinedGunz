@@ -11,6 +11,7 @@ target_include_directories(cml PUBLIC
 	Include
 	../sdk/rapidxml/include)
 
+set_target_properties(cml PROPERTIES COMPILE_FLAGS "/std:c++17")
 target_link_libraries(cml PUBLIC zlib)
 if (UNIX)
 	target_link_libraries(cml PUBLIC pthread)

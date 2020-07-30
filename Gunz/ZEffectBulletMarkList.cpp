@@ -149,7 +149,7 @@ bool ZEffectBulletMarkList::Draw()
 		if(m_dwBase >= EFFECTBASE_DISCARD_COUNT)
 			m_dwBase = 0;
 
-		DWORD dwThisNum = min(RemainNum, static_cast<u32>(BULLETMARK_FLUSH_COUNT));
+		DWORD dwThisNum = min(static_cast<u32>(RemainNum), static_cast<u32>(BULLETMARK_FLUSH_COUNT));
 
 		dwThisNum = min(dwThisNum, EFFECTBASE_DISCARD_COUNT - m_dwBase);
 

@@ -10,6 +10,9 @@ add_target(NAME MatchServer_lib TYPE STATIC SOURCES "${src}")
 
 target_include_directories(MatchServer_lib PUBLIC
 	.
+	../SafeUDP/Include
+	../cml/Include
+	../CSCommon/Include
 	../sdk/dx9/Include
 	../Locator
 	../sdk)

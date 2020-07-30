@@ -2,6 +2,7 @@
 #include "MMatchLocale.h"
 #include "MMatchServer.h"
 #include "MMatchConfig.h"
+#include "SafeString.h"
 
 MMatchLocale* MMatchLocale::GetInstance()
 {
@@ -57,11 +58,11 @@ bool MMatchLocale::ConnectToDBAgent()
 {
 	if (m_nCountry != MC_JAPAN) return false;
 
-	if ((m_pDBAgentClient) && (!m_pDBAgentClient->IsConnected()) && (!m_pDBAgentClient->GetSock()->IsActive()))
+	if ((m_pDBAgentClient) && (!m_pDBAgentClient->IsConnected()) && (!dynamic_cast<MCustomClient*>(m_pDBAgentClient)->GetSock()->IsActive()))
 	{
 		char szIP[128];
 		strcpy_safe(szIP, MGetServerConfig()->GetNJDBAgentIP());
-		m_pDBAgentClient->Connect(szIP, MGetServerConfig()->GetNJDBAgentPort());
+		dynamic_cast<MCustomClient*>(m_pDBAgentClient)->Connect(szIP, MGetServerConfig()->GetNJDBAgentPort());
 
 		MMatchServer::GetInstance()->LOG(MMatchServer::LOG_ALL, "Connect to DBAgent\n");
 		return true;
@@ -76,7 +77,7 @@ bool MMatchLocale::PostLoginInfoToDBAgent(const MUID& uidComm, const char* szCN,
 	if (m_nCountry != MC_JAPAN) return false;
 	if (m_pDBAgentClient)
 	{
-		if (!m_pDBAgentClient->GetSock()->IsActive())
+		if (!dynamic_cast<MCustomClient*>(m_pDBAgentClient)->GetSock()->IsActive())
 		{
 			if (!m_pDBAgentClient->IsConnected())
 			{

@@ -12,8 +12,8 @@ void MCriticalSection::lock() { EnterCriticalSection(&cs()); }
 void MCriticalSection::unlock() { LeaveCriticalSection(&cs()); }
 
 CRITICAL_SECTION& MCriticalSection::cs() {
-	static_assert(sizeof(buf) == sizeof(CRITICAL_SECTION) &&
-		alignof(decltype(buf)) == alignof(CRITICAL_SECTION), "");
+	static_assert(sizeof(buf) == sizeof(CRITICAL_SECTION), "sizeof(buf) != sizeof(CRITICAL_SECTION)");
+	static_assert(alignof(decltype(buf)) == alignof(CRITICAL_SECTION), "decltype(buf)) != alignof(CRITICAL_SECTION)");
 	return reinterpret_cast<CRITICAL_SECTION&>(*(char*)buf);
 }
 

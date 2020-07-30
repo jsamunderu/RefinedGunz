@@ -1,5 +1,5 @@
-#pragma once
-
+#ifndef _MBASELOCALE_H
+#define _MBASELOCALE_H
 enum MCountry
 {
 	MC_INVALID			= 0,
@@ -46,3 +46,4 @@ public:
 
 MCountry GetCountryID( const char* pCountry );
 MLanguage GetLanguageID( const char* pLanguage );
+#endif

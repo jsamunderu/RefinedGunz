@@ -18,7 +18,7 @@ public:
 	void unlock();
 
 private:
-	void* buf[24 / sizeof(void*)];
+	void* buf[sizeof(CRITICAL_SECTION)/sizeof(PVOID64)];
 
 	CRITICAL_SECTION& cs();
 };

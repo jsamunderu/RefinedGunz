@@ -44,7 +44,7 @@ void CODBCRecordset::Bind()
 		constexpr SQLSMALLINT Size = 1024;
 		SQLCHAR NameBuf[Size];
 		SQLSMALLINT NameLength, DataType, DecimalDigits, Nullable;
-		SQLULEN ColumnSize;
+		/*SQLULEN*/UINT64  ColumnSize;
 		CALL(SQLDescribeCol, Statement, i, NameBuf, Size, &NameLength,
 			&DataType, &ColumnSize, &DecimalDigits, &Nullable);
 		Field.Name.assign(reinterpret_cast<char*>(NameBuf), NameLength);
@@ -144,7 +144,7 @@ CDBBinary CODBCRecordset::SelectBinary(const CString& strQuery)
 
 	HSTMT			hStmt;
 	unsigned char	Data[BINARY_FIELD_MAX_SIZE] = {0};
-	SQLLEN		ind = SQL_DATA_AT_EXEC;
+	/*SQLLEN*/INT64 		ind = SQL_DATA_AT_EXEC;
 
 	if (SQL_SUCCESS != SQLAllocHandle(SQL_HANDLE_STMT, m_pDatabase->GetConn(), &hStmt))
 	{
@@ -226,7 +226,7 @@ bool CODBCRecordset::InsertBinary(const CString& strQuery, const u8* pData, int 
 
 	HSTMT		hStmt;
 	SQLTCHAR*	pWriteBuff;
-	SQLLEN  ind = SQL_DATA_AT_EXEC;
+	/*SQLLEN*/INT64  ind = SQL_DATA_AT_EXEC;
 
 	if (SQL_ERROR == SQLAllocHandle(SQL_HANDLE_STMT, m_pDatabase->GetConn(), &hStmt))
 	{

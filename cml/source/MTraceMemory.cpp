@@ -52,7 +52,8 @@ int __cdecl MyAllocHook(
 
 		int nDepth = 0;
 		DWORD *stack;
-		_asm {
+		__asm
+		{
 			mov stack, ebp
 		}
 		DWORD retAddress;
@@ -251,7 +252,7 @@ void MDumpCallStack(int lRequest)
 
 			DWORD             dwDisplacement = 0;
 
-			if (SymGetSymFromAddr(GetCurrentProcess(), address, &dwDisplacement, pSymbol))
+			if (SymGetSymFromAddr(GetCurrentProcess(), address, (PDWORD64)&dwDisplacement, pSymbol))
 				szSymName = pSymbol->Name;
 			else
 				szSymName = "<nosymbols>";
