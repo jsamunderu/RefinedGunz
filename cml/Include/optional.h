@@ -29,7 +29,7 @@ public:
 	}
 
 	template <typename... ArgsType>
-	explicit optional(in_place_t, ArgsType&&... Args) {
+	explicit optional(::in_place_t, ArgsType&&... Args) {
 		emplace(std::forward<ArgsType>(Args)...);
 	}
 
